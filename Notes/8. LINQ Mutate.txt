@@ -1,0 +1,123 @@
+###############################################
+LINQ Mutate
+###############################################
+
+
+Source:https://www.dotnetperls.com/linq
+
+OrderByDescending. This sorts elements from high to low. It is an extension method found in the System.Linq namespace. 
+It receives a key selector Func instance. We pass it a lambda expression that selects the key.
+
+ // Create array of tuples.
+        Tuple<int, int>[] tuples = new Tuple<int, int>[3];
+        tuples[0] = new Tuple<int, int>(3, 6);
+        tuples[1] = new Tuple<int, int>(6, 4);
+        tuples[2] = new Tuple<int, int>(0, 60);
+
+        // Order by descending on Item1.
+        var result = tuples.OrderByDescending(a => a.Item1);
+        foreach (var item in result)
+        {
+            Console.WriteLine(item);
+        }
+
+Reverse
+Elements can be reversed in many ways. One way applies the Reverse extension method for a declarative, clear syntax. 
+The Reverse method acts upon many collection types.
+
+// Create an array.
+        int[] array = { 1, 2, 4 };
+        // Call reverse extension method on the array.
+        var reverse = array.Reverse();
+        // Write contents of array to screen.
+        foreach (int value in reverse)
+        {
+            Console.WriteLine(value);
+        }
+
+Select
+This method applies a method to elements. It is an elegant way to modify the elements in a collection such as an array. 
+This method receives as a parameter an anonymous function—typically specified as a lambda expression.
+
+string[] array = { "cat", "dog", "mouse" };
+
+        // Apply a transformation lambda expression to each element.
+        // ... The Select method changes each element in the result.
+        var result = array.Select(element => element.ToUpper());
+
+        // Display the result.
+        foreach (string value in result)
+        {
+            Console.WriteLine(value);
+        }
+
+
+SelectMany
+SelectMany, from LINQ, collapses many elements into a single collection. The resulting collection is of another element type.
+We specify how an element is transformed into a collection of other elements.
+
+ string[] array =
+        {
+            "dot",
+            "net",
+            "perls"
+        };
+
+        // Convert each string in the string array to a character array.
+        // ... Then combine those character arrays into one.
+        var result = array.SelectMany(element => element.ToCharArray());
+
+        // Display letters.
+        foreach (char letter in result)
+        {
+            Console.WriteLine(letter);
+        }
+
+Single
+Single. This method searches for single instances. It is found in System.Linq. With it, 
+we search a collection for a single instance of an element matching a condition. If the collection has any number other than one element, 
+we get an exception.
+
+int[] array1 = { 1, 3, 1000, 4, 5 };
+        int value1 = array1.Single(element => element > 999);
+
+        // Ensure only one element.
+        int[] array2 = { 4 };
+        int value2 = array2.Single();
+
+        Console.WriteLine(value1);
+        Console.WriteLine(value2);
+
+        // See exception when more than one element found.
+        try
+        {
+            int value3 = array1.Single(element => element > 0);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.GetType());
+        }
+
+SingleOrDefault
+SingleOrDefault is similar to Single. On empty collections, it returns the default value for the type. 
+With it you receive the single matching element, or the default value if no element is found.
+
+int[] array = { 1, 2, 3 };
+
+        // Default is returned if no element found.
+        int a = array.SingleOrDefault(element => element == 5);
+        Console.WriteLine(a);
+
+        // Value is returned if one is found.
+        int b = array.SingleOrDefault(element => element == 1);
+        Console.WriteLine(b);
+
+        try
+        {
+            // Exception is thrown if more than one is found.
+            int c = array.SingleOrDefault(element => element >= 1);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.GetType());
+        }

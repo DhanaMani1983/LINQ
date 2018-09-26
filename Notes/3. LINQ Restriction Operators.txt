@@ -1,0 +1,19 @@
+####################
+LINQ Restriction Operators
+####################
+
+
+LINQ samples can be found in the link LINQ 101 samples 
+
+In LINQ restriction functions, we can pass two input parameters, first being the collection element and option second position 
+will be the position as below
+
+string[] numbers = {"Zero","One","Two","Three","Four","Five","Six","Seven","Eight","Nine" };
+            var shortDigits = numbers.Where((number, index) => number.Length < index);
+            Console.WriteLine("Digit's length less than the position");
+            foreach(string s in shortDigits)
+            {
+                Console.WriteLine(s);
+            }
+
+

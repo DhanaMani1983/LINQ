@@ -1,0 +1,219 @@
+###############################################
+LINQ Mutate
+###############################################
+
+
+Source:https://www.dotnetperls.com/linq
+
+FirstOrDefault is almost the same as First. The difference is how it handles empty collections. 
+If a collection is empty, it returns the default value for the type. The method internally checks if an element exists.
+
+ var list = new List<string>() { "Cat", "Rat", "Mouse" };
+        Console.WriteLine(list.FirstOrDefault());
+
+        //
+        // This query produces no results so FirstOrDefault is null.
+        //
+        var query1 = from element in list
+                    where element.Length > 10
+                    select element;
+        Console.WriteLine(query1.FirstOrDefault() == null);
+
+First gets the first matching object. These objects can be of any type. We access the First extension method in the System.Linq namespace. 
+The argument to First is a Predicate instance—it can be specified in the lambda syntax.
+
+class Program
+{
+    class Animal
+    {
+        public string Name { get; set; }
+        public int Age { get; set; }
+        public override string ToString()
+        {
+            return string.Format("Name={0},Age={1}",
+                Name,
+                Age);
+        }
+    };
+
+    static List<Animal> _animals = new List<Animal>()
+    {
+        new Animal()
+        {
+            Name = "Camel",
+            Age = 5
+        },
+        new Animal()
+        {
+            Name = "Ape",
+            Age = 3
+        },
+        new Animal()
+        {
+            Name = "Dog",
+            Age = 6
+        }
+    };
+
+    static void Main()
+    {
+        // A
+        // Get Ape from collection
+        Animal a1 = GetAnimal1("Ape");
+        Console.WriteLine(a1);
+
+        // B
+        // Get Camel from collection
+        Animal a2 = GetAnimal2("Camel");
+        Console.WriteLine(a2);
+    }
+
+    static Animal GetAnimal1(string n)
+    {
+        foreach (Animal a in _animals)
+        {
+            if (a.Name == n)
+            {
+                return a;
+            }
+        }
+        throw new Exception(n);
+    }
+
+    static Animal GetAnimal2(string n)
+    {
+        return _animals.First(a => a.Name == n);
+    }
+}
+
+GroupBy. This method transforms a collection into groups. Each group has a key. With this method from the System.Linq namespace, 
+you can apply grouping to many collections. We examine the GroupBy method.
+
+ // Input array.
+        int[] array = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+        // Group elements by IsEven.
+        var result = array.GroupBy(a => IsEven(a));
+
+        // Loop over groups.
+        foreach (var group in result)
+        {
+            // Display key for group.
+            Console.WriteLine("IsEven = {0}:", group.Key);
+
+            // Display values in group.
+            foreach (var value in group)
+            {
+                Console.Write("{0} ", value);
+            }
+
+            // End line.
+            Console.WriteLine();
+        }
+
+List<string> colors = new List<string>();
+colors.Add("green");
+colors.Add("blue");
+colors.Add("yellow");
+colors.Add("green");
+colors.Add("yellow");
+IEnumerable<IGrouping<string, List<string>>> groupedColors = 
+    colors.GroupBy(
+        c => c, 
+        (key, result) => return new { Color = key, Count = result.Count() }
+    );
+
+foreach(var group in groupedColors)
+{
+    Console.WriteLine(string.Format("Key (Color): {0}tCount: {1}", group.Color, group.Count));
+}
+
+Intersect. This is an extension method from the System.Linq namespace. 
+In set theory, an intersection is the subset of each collection that is found in both collections.
+
+ // Assign two arrays.
+        int[] array1 = { 1, 2, 3 };
+        int[] array2 = { 2, 3, 4 };
+        // Call Intersect extension method.
+        var intersect = array1.Intersect(array2);
+        // Write intersection to screen.
+        foreach (int value in intersect)
+        {
+            Console.WriteLine(value);
+        }
+
+
+OfType searches for elements by their types. The System.Linq namespace provides this generic method to test derived types. 
+By using the OfType method, we get all the elements of a matching type.
+
+ // Create an object array for the demonstration.
+        object[] array = new object[4];
+        array[0] = new StringBuilder();
+        array[1] = "example";
+        array[2] = new int[1];
+        array[3] = "another";
+
+        // Filter the objects by their type.
+        // ... Only match strings.
+        // ... Print those strings to the screen.
+        var result = array.OfType<string>();
+        foreach (var element in result)
+        {
+            Console.WriteLine(element);
+        }
+
+
+LastOrDefault, Last. LastOrDefault is a helpful method. It finds the last element in a collection that matches a condition. 
+We get either the last matching element or the default value. Last meanwhile will throw an exception if no element exists.
+
+ // Last or default.
+        int[] array1 = { 1, 2, 3 };
+        Console.WriteLine(array1.LastOrDefault());
+
+        // Last when there are no elements.
+        int[] array2 = { };
+        Console.WriteLine(array2.LastOrDefault());
+
+        // Last odd number.
+        Console.WriteLine(array1.LastOrDefault(element => element % 2 != 0));
+
+Join. This is a keyword in LINQ. As with other query languages (such as SQL) joining matches every element in two collections based on some condition.
+
+// Array 1.
+        var ints1 = new int[3];
+        ints1[0] = 4;
+        ints1[1] = 3;
+        ints1[2] = 0;
+
+        // Array 2.
+        var ints2 = new int[3];
+        ints2[0] = 5;
+        ints2[1] = 4;
+        ints2[2] = 2;
+
+        {
+            // Join with method call.
+            var result = ints1.Join<int, int, int, int>(ints2,
+                x => x + 1,
+                y => y,
+                (x, y) => x);
+
+            // Display results.
+            foreach (var r in result)
+            {
+                Console.WriteLine(r);
+            }
+        }
+
+        {
+            // Join with query expression.
+            var result = from t in ints1
+                         join x in ints2 on (t + 1) equals x
+                         select t;
+
+            // Display results.
+            foreach (var r in result)
+            {
+                Console.WriteLine(r);
+            }
+        }

@@ -1,0 +1,18 @@
+###############################################
+LINQ Convert
+###############################################
+
+
+Source:https://www.dotnetperls.com/linq
+
+
+TOArray
+ToArray converts types to arrays. It forces the evaluation of query expressions and IEnumerable types. Implemented in System.Linq, 
+it reduces program length and increases program simplicity.
+
+ToList. This extension method converts collections (IEnumerables) to List instances. 
+It is fast and easy-to-remember. It returns a List instance with the appropriate elements.
+
+
+
+

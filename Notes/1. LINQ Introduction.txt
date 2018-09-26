@@ -1,0 +1,14 @@
+LINQ - Expantion is Language Integrated Query
+
+Used to access data using programming language.
+
+Benefits:
+Simplified way of data access
+Integrated within the language
+Unified solution for data processing. for in memory objects like xml, database and xml
+similar to SQL.
+Typed data - In Ado.net for each column in data table, developer need to remember column name and column data type
+But in LINQ there is intellisense on the column name and its data type.
+
+
+DAO, RDAO, ADO, Ado.net 

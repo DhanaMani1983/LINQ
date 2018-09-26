@@ -1,0 +1,28 @@
+####################
+LINQ Sample
+####################
+
+Basic version of LINQ
+
+1. Create an array of numbers, write LINQ using extension method where to get list of numbers where value less than 5
+
+Concept behind LINQ
+
+Similat to SQL, where we have data source(eg array/list), then apply condition and then select the value.
+
+Forms of LINQ
+
+Fluent method(comprehensive method)
+Extension method(Lambda method)
+
+
+####################
+C# Features
+####################
+
+To support LINQ C# have certain features added
+
+Extension methods - Linq works using extension method.
+Lambda expression - Linq loops data, but to manipulate data we use lambda expressions.
+var - Output of Linq query is Ienumerable, type of Ienumerable is dynamic so new type called var is created.
+Anonymous types - We can create types on the fly and assign it to the output of linq query.

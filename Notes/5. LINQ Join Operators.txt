@@ -1,0 +1,10 @@
+###############################################
+LINQ Join Operators
+###############################################
+
+
+Cross Join:
+
+You can use Join keyword to do join on two enumerables.
+
+

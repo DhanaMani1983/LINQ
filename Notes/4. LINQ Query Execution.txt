@@ -1,0 +1,29 @@
+###############################################
+LINQ Query Execution
+###############################################
+
+In Linq we should be aware of three things which is 
+what is query
+what is execution
+what is result
+
+string numberString = "9742863514";
+
+            var sNumber = numberString
+                         .Select(s => int.Parse(s.ToString()))
+                         .Where(i=>i%3==0)
+                         .ToList();
+            foreach(int s in sNumber)
+            {                
+                Console.WriteLine("Numbers divisibe by 3:{0}", s);
+            }   
+
+var sNumber section is the query and the query will get executed when the for each loop runs. The result 
+of the query is Ienumerable. 
+
+Query execution of three types
+
+Defered Execution - while writing the query if i dont want to execute it, only when during for each.
+Immediate Execution - if you use to list in the query, then it becomes a result and stored in memory
+Query Reuse - if there is no tolist or toarray in the query we can reuse it for different purpose.
+
