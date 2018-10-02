@@ -1,0 +1,119 @@
+###############################################
+LINQ Mutate
+###############################################
+
+
+Source:https://www.dotnetperls.com/linq
+
+Aggregate applies a method to each element. It applies a function to each successive element. 
+With this extension method, we act upon the aggregate of all previous elements. This makes certain methods, such as sum, possible.
+
+int[] array = { 1, 2, 3, 4, 5 };
+        int result = array.Aggregate((a, b) => b + a);
+        // 1 + 2 = 3
+        // 3 + 3 = 6
+        // 6 + 4 = 10
+        // 10 + 5 = 15
+        Console.WriteLine(result);
+
+        result = array.Aggregate((a, b) => b * a);
+        // 1 * 2 = 2
+        // 2 * 3 = 6
+        // 6 * 4 = 24
+        // 24 * 5 = 120
+        Console.WriteLine(result);
+
+
+All. This is an extension method. It tells us if all the elements in a collection match a certain condition. 
+It is part of the System.Linq namespace in the .NET Framework. It returns true or false.
+
+int[] array = { 10, 20, 30 };
+
+        // Are all elements >= 10? YES
+        bool a = array.All(element => element >= 10);
+
+        // Are all elements >= 20? NO
+        bool b = array.All(element => element >= 20);
+
+        // Are all elements < 40? YES
+        bool c = array.All(element => element < 40);
+
+        Console.WriteLine(a);
+        Console.WriteLine(b);
+        Console.WriteLine(c);
+
+
+
+Any. This method receives a Predicate. It determines if a matching element exists in a collection. We could do this with a loop construct. 
+But the Any extension method provides another way. It reduces code size.
+
+int[] array = { 1, 2, 3 };
+        // See if any elements are divisible by two.
+        bool b1 = array.Any(item => item % 2 == 0);
+        // See if any elements are greater than three.
+        bool b2 = array.Any(item => item > 3);
+        // See if any elements are 2.
+        bool b3 = array.Any(item => item == 2);
+        // Write results.
+        Console.WriteLine(b1);
+        Console.WriteLine(b2);
+        Console.WriteLine(b3);
+
+Average is an extension method. It computes the average value using only one statement. 
+It provides a declarative way to compute the average value of a sequence in the C# language.
+
+ double[] array1 = { 1, 2, 3, 5, 0 };
+        double average1 = array1.Average();
+        Console.WriteLine(average1);
+        //
+        // Use Average to compute average string length.
+        //
+        string[] array2 = { "dog", "cat", "perls" };
+        double average2 = array2.Average(x => x.Length);
+        Console.WriteLine(average2);
+
+This extension method enumerates elements. In many cases, the Count() extension is not useful, but in some program contexts it is appropriate. 
+Most collections have a Length or Count property that is more efficient.
+
+int[] array = { 1, 2, 3 };
+
+        // Don't use Count() like this! Use Length.
+        Console.WriteLine(array.Count());
+
+        List<int> list = new List<int>() { 1, 2, 3 };
+
+        // Don't use Count() like this! Use Count property.
+        Console.WriteLine(list.Count());
+
+        var result = from element in array
+                     orderby element descending
+                     select element;
+
+        // Good.
+        Console.WriteLine(result.Count());
+
+SequenceEqual. Are two sequences the same? With the SequenceEqual extension from System.Linq in the C# language, 
+you can test two collections for equality in one statement. We look at the SequenceEqual method.
+
+ string[] array1 = { "dot", "net", "perls" };
+        string[] array2 = { "a", "different", "array" };
+        string[] array3 = { "dot", "net", "perls" };
+        string[] array4 = { "DOT", "NET", "PERLS" };
+
+        bool a = array1.SequenceEqual(array2);
+        bool b = array1.SequenceEqual(array3);
+        bool c = array1.SequenceEqual(array4, StringComparer.OrdinalIgnoreCase);
+
+        Console.WriteLine(a);
+        Console.WriteLine(b);
+        Console.WriteLine(c);
+
+Sum. This method adds up all values in an IEnumerable. It computes the sum total of all the numbers in an array, or List, of integers. 
+This extension method in LINQ provides an excellent way to do this with minimal calling code.
+
+var numbers = new double[] { 2.5, 5.0 };
+        // Use ternary in Sum selector.
+        // ... If 2.5, add 100.
+        //     Otherwise add just 1.
+        var result = numbers.Sum(x => x == 2.5 ? 100 : 1);
+        Console.WriteLine(result);

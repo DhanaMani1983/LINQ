@@ -1,0 +1,86 @@
+###############################################
+LINQ Mutate
+###############################################
+
+
+Source:https://www.dotnetperls.com/linq
+
+SkipWhile. SkipWhile skips over elements matching a condition. This method is provided in the System.Linq namespace for the C# language. 
+With SkipWhile you need to specify a Func condition to skip over values with.
+
+   int[] array = { 1, 3, 5, 10, 20 };
+        var result = array.SkipWhile(element => element < 10);
+        foreach (int value in result)
+        {
+            Console.WriteLine(value);
+        }
+
+Skip is an extension method. It returns only the elements following a certain number of initial elements that must be ignored. 
+It is found in the System.Linq namespace. It is useful in programs that selectively process elements.
+
+ int[] array = { 1, 3, 5, 7, 9, 11 };
+        //
+        // Get collection of all elements except first two.
+        //
+        var items1 = array.Skip(2);
+        foreach (var value in items1)
+        {
+            Console.WriteLine(value);
+        }
+        //
+        // Call Skip again but skip the first four elements this time.
+        //
+        var items2 = array.Skip(4);
+        foreach (var value in items2)
+        {
+            Console.WriteLine(value);
+        }
+
+Take returns the first specified number of elements. It acts upon an IEnumerable sequence. 
+It returns another IEnumerable sequence containing the specified elements. We see basic usages of this extension method.
+
+ List<string> list = new List<string>();
+        list.Add("cat");
+        list.Add("dog");
+        list.Add("programmer");
+
+        // Get first 2 elements
+        var first = list.Take(2);
+        foreach (string s in first)
+        {
+            Console.WriteLine(s);
+        }
+        Console.WriteLine();
+
+        // Get last 2 elements reversed
+        var last = list.Reverse<string>().Take(2);
+        foreach (string s in last)
+        {
+            Console.WriteLine(s);
+        }
+        Console.WriteLine();
+
+        // Get first 1000 elements
+        var all = list.Take(1000);
+        foreach (string s in all)
+        {
+            Console.WriteLine(s);
+        }
+        Console.WriteLine();
+
+TakeWhile. TakeWhile returns elements while a Predicate matches. The Predicate returns true or false. When it returns false, TakeWhile returns. 
+TakeWhile operates from the beginning of an IEnumerable collection.
+
+ // Contains five numbers.
+        int[] values = { 1, 3, 5, 8, 10 };
+
+        // Take all non-even (odd) numbers.
+        var result = values.TakeWhile(item => item % 2 != 0);
+
+        // Display result.
+        foreach (int value in result)
+        {
+            Console.WriteLine(value);
+        }
+
+

@@ -1,0 +1,62 @@
+###############################################
+LINQ Mutate
+###############################################
+
+In LINQ - three things to remember Query, Execution, Output.
+
+Types of Joins, Cross Join, Group Join, Cross Join with Group Join, Inner Join
+
+Group Join:
+
+Group join is same as join but you can write the object into collection. Refer CKA.Collectiva Group Join
+
+Projection Operators:
+
+Whatever we specify after select is projection operators
+
+Anonymous Type:
+
+using new keyword we can create anonymous types
+
+
+Let. This keyword is a part of a query expression. It introduces a variable. We can then reuse the variable elsewhere in the query.
+
+ int[] array = { 1, 3, 5, 7, 9 };
+
+        var result = from element in array
+                     let v = element * 100
+                     where v >= 500
+                     select v;
+
+        foreach (var element in result)
+            Console.WriteLine(element);
+
+Enumerable.Empty generates an IEnumerable of zero elements. It can be used when you want to avoid a query expression and instead just want to use an empty sequence. 
+It can help when you want to return no values.
+
+var empty = Enumerable.Empty<int>();
+        Console.WriteLine(empty.Count());
+        int[] array = empty.ToArray();
+        Console.WriteLine(array.Length);
+
+Enumerable.Range. A sequence of numbers progresses in order: 10, 11, 12, 13. With Enumerable.Range, each number is one greater than the previous.
+
+// Generate a range of number starting at 5.
+        // ... First parameter is the start number.
+        //     Second parameter is the count of numbers (not the last index).
+        IEnumerable<int> numbers = Enumerable.Range(5, 3);
+        foreach (int n in numbers)
+        {
+            Console.WriteLine(n);
+        }
+
+
+Enumerable.Repeat returns a collection with repeated elements. In the first argument, we specify a value—this is repeated the number of times specified in the second argument. 
+This method is located in the System.Linq namespace.
+
+ // Create sequence of ten ones.
+        var integers = Enumerable.Repeat(1, 10);
+        // Display.
+        foreach (int value in integers)
+            Console.WriteLine(value);
+    }
